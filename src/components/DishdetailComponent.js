@@ -16,16 +16,16 @@ class DishDetail extends Component {
     }
 
     renderComments(dish) {
-        const dishComment = this.props.selectedDish.comments.map((comment) => {
+        const dishComment = this.props.dish.comments.map((comment) => {
             return (
                 <div key={comment.id}>
                     <ul className="list-unstyled">
                         <li>{comment.comment}</li>
-                        <li>-- <span>{comment.author}</span> , {new Intl.DateTimeFormat('en-US', {
+                        <p>-- <span>{comment.author}</span> , {new Intl.DateTimeFormat('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: '2-digit'
-                        }).format(new Date(comment.date))}</li>
+                        }).format(new Date(Date.parse((comment.date))))}</p>
                     </ul>
                 </div>
             );
@@ -36,6 +36,7 @@ class DishDetail extends Component {
                 <div>
                     <h4>Comments</h4>
                 </div>
+                
                 {dishComment}
             </div>
         );
@@ -57,14 +58,16 @@ class DishDetail extends Component {
 
     render() {
 
-        if (this.props.selectedDish != null) {
+        if (this.props.dish != null) {
             return (
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(this.props.selectedDish)}
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(this.props.selectedDish)}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            {this.renderDish(this.props.dish)}
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            {this.renderComments(this.props.dish)}
+                        </div>
                     </div>
                 </div>
             );

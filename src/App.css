@@ -32,3 +32,19 @@ address {
 	margin: 0;
 	color: #0f0f0f;
 }
+
+/* changing scrollbar */
+
+body::-webkit-scrollbar {
+	width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+	background: #eeeeeeba;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #acacac;
+	border-radius: 5px;
+	border: 2px solid #707070;
+}

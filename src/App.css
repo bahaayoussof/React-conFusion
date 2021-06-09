@@ -37,19 +37,3 @@ address {
 .btn-socail-icon {
 	margin-left: 5px;
 }
-
-/* changing scrollbar */
-
-body::-webkit-scrollbar {
-	width: 12px;
-}
-
-body::-webkit-scrollbar-track {
-	background: #eeeeeeba;
-}
-
-body::-webkit-scrollbar-thumb {
-	background-color: #acacac;
-	border-radius: 5px;
-	border: 2px solid #707070;
-}

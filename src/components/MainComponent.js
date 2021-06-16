@@ -19,9 +19,6 @@ const mapStateToProps = state => {
 }
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
 
@@ -40,7 +37,6 @@ class Main extends Component {
                     leader={this.props.leaders.filter((leader) => leader.featured)[0]} />
             );
         }
-
 
         return (
             <div>

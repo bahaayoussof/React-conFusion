@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { addComment } from '../redux/ActionCreators';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -20,26 +21,26 @@ class CommentForm extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.toggleForm = this.toggleForm.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
-    toggleForm() {
+    toggleModal() {
         this.setState({
             isFormOpen: !this.state.isFormOpen
         })
     }
 
     handleSubmit(values) {
-        console.log(`Current State is: ${JSON.stringify(values)}`);
-        alert(`Current State is: ${JSON.stringify(values)}`);
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
         return (
             <>
-                <Button outline onClick={this.toggleForm}><span className="fa fa-pencil" /> Submit Comment</Button>
-                <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm}>
-                    <ModalHeader toggle={this.toggleForm}>Submit Comment</ModalHeader>
+                <Button outline onClick={this.toggleModal}><span className="fa fa-pencil" /> Submit Comment</Button>
+                <Modal isOpen={this.state.isFormOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                             <Row className="form-group">
@@ -112,7 +113,7 @@ function RenderDish({ dish }) {
     );
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
 
     if (comments != null) {
         return (
@@ -133,7 +134,7 @@ function RenderComments({ comments }) {
                     })}
                 </ul>
 
-                <CommentForm />
+                <CommentForm dishId={dishId} addComment={addComment} />
             </div>
         );
     }
@@ -158,7 +159,8 @@ const DishDetail = (props) => {
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments}
+                        addComment={props.addComment} dishId={props.dish.id} />
                 </div>
             </div>
         );

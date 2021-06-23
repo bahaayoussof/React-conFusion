@@ -1,7 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-// Post Comment
 export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
     payload: comment
@@ -43,7 +42,6 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
         });
 }
 
-// Post Feedback
 export const addFeedback = (feedback) => ({
     type: ActionTypes.ADD_FEEDBACK,
     payload: feedback
